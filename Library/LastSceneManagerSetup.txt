@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Plugins/GameOfWhales/Examples/Example1/GowExample1.unity
+  isLoaded: 1
+  isActive: 1

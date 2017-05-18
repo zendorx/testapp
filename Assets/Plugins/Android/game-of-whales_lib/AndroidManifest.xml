@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.x3m.gow_test">
+    <!--<uses-sdk android:minSdkVersion="15"/>-->
+    
+
+    <application>
+		<meta-data 
+       android:name="com.google.android.gms.version" 
+       android:value="@integer/google_play_services_version" />
+
+      <!--<meta-data android:name="GOWLoggingEnabled" android:value="true" /> -->
+       
+       <service
+            android:name="com.gameofwhales.plugin.RegistrationIntentService"
+            android:exported="false">
+        </service>
+
+      <receiver
+            android:name="com.gameofwhales.plugin.GOWBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+        <intent-filter android:priority="10000">
+          <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+          <category android:name="com.x3m.gow_test" />
+        </intent-filter>
+      </receiver>
+
+      <service android:name="com.gameofwhales.plugin.GOWBroadcastReceiver" />
+
+        <service
+            android:name="com.gameofwhales.plugin.GowTokenListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <activity android:name="com.gameofwhales.plugin.GOWActivity"
+                  android:label="@string/app_name"
+                  android:launchMode="singleTop"
+                  android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen">
+          <intent-filter>
+            <action android:name="OPEN_GOW" />
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+          </intent-filter>
+        </activity>
+    </application>
+
+	<uses-permission android:name="android.permission.WAKE_LOCK" /> 
+  	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="com.android.vending.BILLING" />
+</manifest>
